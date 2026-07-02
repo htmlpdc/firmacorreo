@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador Firma PDC</title>
+<title>Generador Firma PDC Final</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -12,7 +12,11 @@ body{font-family:Nunito,sans-serif;background:#f4f7fb;margin:24px}
 .wrapper{display:flex;gap:24px;flex-wrap:wrap}
 .card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
 .left{width:360px}
-input{width:100%;padding:10px;margin:6px 0 10px;border:1px solid #ddd;border-radius:8px}
+input,select{width:100%;padding:10px;margin:6px 0 10px;border:1px solid #ddd;border-radius:8px;font-family:Nunito,sans-serif;font-size:14px;background:#fff}
+label.fld{display:block;font-size:12px;font-weight:700;color:#082A8A;margin:6px 0 -2px}
+.cellrow{display:flex;gap:8px}
+.cellrow select{width:120px;flex-shrink:0}
+.cellrow input{flex:1}
 button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:white;font-weight:800;cursor:pointer}
 #firma{min-width:535px;height:168px;display:flex;background:#fff;border:1px solid #ddd;width:max-content}
 .logo-side{width:217px;height:168px;flex-shrink:0}
@@ -35,11 +39,40 @@ button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:
 <div class="card left">
 <input id="name" value="Nombre y Apellido">
 <input id="role" value="Nombre de tu puesto">
-<input id="cell" value="(000) 0000 0000">
-<input id="addr1" value="Dirección línea 1">
-<input id="addr2" value="Dirección línea 2">
+
+<label class="fld">Sitio</label>
+<select id="site">
+<option value="">-- Selecciona un sitio --</option>
+<optgroup label="Guatemala">
+<option value="Reforma 10">Reforma 10</option>
+<option value="D15">D15</option>
+<option value="Cayalá">Cayalá</option>
+<option value="Oficinas Naranjo">Oficinas Naranjo</option>
+<option value="CD Amatitlan">CD Amatitlán</option>
+<option value="Planta Escuintla">Planta Escuintla</option>
+<option value="Planta San Cristobal">Planta San Cristóbal</option>
+<option value="Sitio Roosevelt">Sitio Roosevelt</option>
+</optgroup>
+<optgroup label="El Salvador">
+<option value="CD San Miguel">CD San Miguel</option>
+<option value="Sitio El Salvador">Sitio El Salvador</option>
+</optgroup>
+</select>
+
+<label class="fld">Celular</label>
+<div class="cellrow">
+<select id="countryCode">
+<option value="+502" selected>GT +502</option>
+<option value="+503">SV +503</option>
+<option value="+504">HN +504</option>
+<option value="+505">NI +505</option>
+<option value="+1">DO +1</option>
+<option value="+51">PE +51</option>
+</select>
+<input id="cell" value="0000 0000">
+</div>
+
 <input id="mail" value="nombre.apellido@grupopdc.com">
-<input id="web" value="www.grupopdc.com">
 <button onclick="downloadPNG()">Descargar firma PNG</button>
 </div>
 
@@ -53,16 +86,43 @@ button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:
 <div class="line" id="vaddr1"></div>
 <div class="line" id="vaddr2"></div>
 <div class="line" id="vmail"></div>
-<div class="web" id="vweb"></div>
+<div class="web">www.grupopdc.com</div>
 </div>
 </div>
 </div>
 </div>
 
 <script>
-const ids=['name','role','cell','addr1','addr2','mail','web'];
-function update(){ids.forEach(id=>document.getElementById('v'+id).textContent=document.getElementById(id).value);}
+// ===== Direcciones por sitio =====
+// Rellena la dirección de cada sitio aquí cuando las tengas.
+const siteData={
+"Reforma 10":"Reforma 9-55 zona 10, Edificio Reforma 10, nivel 7",
+"D15":"15 calle 20-37, zona 15, Vista Hermosa III, D15",
+"Cayalá":"Boulevard Rafael Landívar 10-05, Local 207, zona 16",
+"Oficinas Naranjo":"23 calle 14-50 El Naranjo, Plaza Kalú, Edificio CRECE, nivel 14",
+"CD Amatitlan":"Km 29.5, Complejo de Bodegas Distripark",
+"Planta Escuintla":"Km 54.5 carretera antigua Palín-Escuintla, Escuintla, PDC",
+"Planta San Cristobal":"4ta calle B 4-53 sector A5, Ciudad San Cristóbal, zona 8 de Mixco",
+"Sitio Roosevelt":"Calzada Roosevelt 11-08, Zona 2 de Mixco, Guatemala (AVON)",
+"CD San Miguel":"",
+"Sitio El Salvador":""
+};
+
+const ids=['name','role','mail'];
+function update(){
+ids.forEach(id=>document.getElementById('v'+id).textContent=document.getElementById(id).value);
+const code=document.getElementById('countryCode').value;
+const cell=document.getElementById('cell').value;
+document.getElementById('vcell').textContent=code+' '+cell;
+}
 ids.forEach(id=>document.getElementById(id).addEventListener('input',update));
+document.getElementById('cell').addEventListener('input',update);
+document.getElementById('countryCode').addEventListener('change',update);
+document.getElementById('site').addEventListener('change',function(){
+document.getElementById('vaddr1').textContent=this.value;
+document.getElementById('vaddr2').textContent=siteData[this.value]||"";
+});
+
 function cleanFilename(t){return t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9 ]/g,"").trim().replace(/\s+/g,"_");}
 async function downloadPNG(){
 const canvas=await html2canvas(document.getElementById('firma'),{scale:3});
