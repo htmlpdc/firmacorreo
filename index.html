@@ -44,18 +44,32 @@ button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:
 <select id="site">
 <option value="">-- Selecciona un sitio --</option>
 <optgroup label="Guatemala">
-<option value="Reforma 10">Reforma 10</option>
-<option value="D15">D15</option>
-<option value="Cayalá">Cayalá</option>
+<option value="Oficinas Reforma 10">Oficinas Reforma 10</option>
+<option value="Oficinas Cayalá">Oficinas Cayalá</option>
 <option value="Oficinas Naranjo">Oficinas Naranjo</option>
-<option value="CD Amatitlan">CD Amatitlán</option>
+<option value="Centro de Distribución Amatitlán">Centro de Distribución Amatitlán</option>
 <option value="Planta Escuintla">Planta Escuintla</option>
-<option value="Planta San Cristobal">Planta San Cristóbal</option>
+<option value="Planta San Cristóbal">Planta San Cristóbal</option>
 <option value="Sitio Roosevelt">Sitio Roosevelt</option>
 </optgroup>
 <optgroup label="El Salvador">
-<option value="CD San Miguel">CD San Miguel</option>
-<option value="Sitio El Salvador">Sitio El Salvador</option>
+<option value="Sitio San Salvador">Sitio San Salvador</option>
+<option value="Oficina Avon">Oficina Avon</option>
+</optgroup>
+<optgroup label="Honduras">
+<option value="Oficinas San Pedro Sula">Oficinas San Pedro Sula</option>
+</optgroup>
+<optgroup label="Nicaragua">
+<option value="Oficinas Managua">Oficinas Managua</option>
+</optgroup>
+<optgroup label="Panamá">
+<option value="Oficinas Panamá Pacífico">Oficinas Panamá Pacífico</option>
+</optgroup>
+<optgroup label="Perú">
+<option value="Oficina Lima">Oficina Lima</option>
+</optgroup>
+<optgroup label="República Dominicana">
+<option value="Oficina Principal Haina">Oficina Principal Haina</option>
 </optgroup>
 </select>
 
@@ -66,6 +80,7 @@ button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:
 <option value="+503">SV +503</option>
 <option value="+504">HN +504</option>
 <option value="+505">NI +505</option>
+<option value="+507">PA +507</option>
 <option value="+1">DO +1</option>
 <option value="+51">PE +51</option>
 </select>
@@ -94,18 +109,21 @@ button{padding:12px 16px;border:none;border-radius:8px;background:#082A8A;color:
 
 <script>
 // ===== Direcciones por sitio =====
-// Rellena la dirección de cada sitio aquí cuando las tengas.
 const siteData={
-"Reforma 10":"Reforma 9-55 zona 10, Edificio Reforma 10, nivel 7",
-"D15":"15 calle 20-37, zona 15, Vista Hermosa III, D15",
-"Cayalá":"Boulevard Rafael Landívar 10-05, Local 207, zona 16",
-"Oficinas Naranjo":"23 calle 14-50 El Naranjo, Plaza Kalú, Edificio CRECE, nivel 14",
-"CD Amatitlan":"Km 29.5, Complejo de Bodegas Distripark",
-"Planta Escuintla":"Km 54.5 carretera antigua Palín-Escuintla, Escuintla, PDC",
-"Planta San Cristobal":"4ta calle B 4-53 sector A5, Ciudad San Cristóbal, zona 8 de Mixco",
-"Sitio Roosevelt":"Calzada Roosevelt 11-08, Zona 2 de Mixco, Guatemala (AVON)",
-"CD San Miguel":"",
-"Sitio El Salvador":""
+"Oficinas Reforma 10":"Avenida La Reforma 9-55, Zona 10, Edificio Reforma 10, Nivel 7, Oficina 701",
+"Oficinas Cayalá":"Boulevard Rafael Landivar 10-05, Local 207, zona 16 (Cayalá)",
+"Oficinas Naranjo":"Edificio Crece, Condado El Naranjo, Zona 4 de Mixco, Ciudad de Guatemala",
+"Centro de Distribución Amatitlán":"Km 28.5 de la Carretera CA-9 Sur, dentro del complejo DistriPark",
+"Planta Escuintla":"Ave Centroamérica, Escuintla, Guatemala",
+"Planta San Cristóbal":"4ta calle B 4-53 sector A5, ciudad San Cristóbal zona 8 de Mixco",
+"Sitio Roosevelt":"Calzada Roosevelt 11-08 zona 2 de Mixco",
+"Sitio San Salvador":"C. Panamericana Km 10 1/2, Santa Tecla, La Libertad",
+"Oficina Avon":"Calle Conchagua Oriente, El Salvador",
+"Oficinas San Pedro Sula":"Plaza Santa Mónica, Torre Ejecutiva Oeste, 2.º piso, Bulevar del Norte, San Pedro Sula, Cortés, Honduras",
+"Oficinas Managua":"Villa Fontana, costado oeste de Club Terraza, Edificio Discover 2, torre nivel 3, oficinas centrales",
+"Oficinas Panamá Pacífico":"International Business Park de Panamá Pacífico, Edificio 3835, oficina 405D",
+"Oficina Lima":"Av. Nicolás Ayllón 2931, Int. E4-1, El Agustino, Lima",
+"Oficina Principal Haina":"Avenida José Francisco Peña Gómez esquina Calle R, Zona Industrial de Haina, Haina, San Cristóbal"
 };
 
 const ids=['name','role','mail'];
